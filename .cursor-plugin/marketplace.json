@@ -2,7 +2,7 @@
   "name": "tigris-agents-plugins",
   "owner": {
     "name": "Tigris Data",
-    "email": "info@tigrisdata.com"
+    "email": "help@tigrisdata.com"
   },
   "metadata": {
     "description": "Tigris object storage plugins for AI code editors"
