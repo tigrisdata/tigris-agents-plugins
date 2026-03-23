@@ -1,0 +1,59 @@
+---
+description: Tigris security guardrails — access control, key management, and safe operations
+alwaysApply: true
+---
+
+# Tigris Security Rules
+
+## Access Control
+
+- **Buckets are private by default.** Never set a bucket to public unless the user explicitly requests it.
+- Prefer **presigned URLs** over public bucket access for sharing files. Presigned URLs expire automatically and limit exposure.
+- When public access is needed, prefer per-object public access over bucket-level public access.
+
+## Credential Safety
+
+- **Never expose secret keys** (`tsec_...`) in client-side code, logs, or error messages.
+- Store credentials in environment variables or a secrets manager — never hardcode them.
+- Access key IDs (`tid_...`) are safe to log; secret keys are not.
+
+## Access Key Scoping
+
+- **Scope access keys to specific buckets** with the minimum required role (`ReadOnly` or `Editor`).
+- Avoid using organization-level admin keys in application code.
+- Create dedicated access keys per application or service.
+
+```bash
+# Good: scoped key with minimal permissions
+tigris access-keys create my-app-key
+tigris access-keys assign <key-id> --bucket my-app-uploads --role ReadOnly
+
+# Bad: unscoped org-level key
+tigris access-keys create my-key
+tigris access-keys assign <key-id> --admin
+```
+
+## Safe Destructive Operations
+
+- **Take a snapshot** before any destructive operation (bulk delete, migration, schema change):
+  ```bash
+  tigris snapshots take my-bucket
+  ```
+- **Enable delete protection** on production buckets to prevent accidental deletion:
+  ```bash
+  tigris buckets set my-bucket --enable-delete-protection true
+  ```
+- Use **copy-on-write forks** for dev/test environments instead of copying production data:
+  ```bash
+  tigris mk --fork-of prod-bucket dev-bucket
+  ```
+  Forks share storage with the source — they are instant and free until data diverges.
+
+## Production Checklist
+
+1. Delete protection enabled on all production buckets
+2. Access keys scoped to specific buckets with minimal roles
+3. No credentials committed to source control
+4. Presigned URLs used instead of public access where possible
+5. Snapshots taken before destructive operations
+6. CORS configured to allow only required origins

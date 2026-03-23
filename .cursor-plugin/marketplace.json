@@ -1,0 +1,17 @@
+{
+  "name": "tigris-agents-plugins",
+  "owner": {
+    "name": "Tigris Data",
+    "email": "info@tigrisdata.com"
+  },
+  "metadata": {
+    "description": "Tigris object storage plugins for AI code editors"
+  },
+  "plugins": [
+    {
+      "name": "tigris-storage",
+      "source": "cursor",
+      "description": "Complete Tigris object storage integration — CLI reference, bucket/object management via MCP, security rules, and a specialized storage agent."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tigris": {
+      "type": "http",
+      "url": "https://mcp.storage.dev/mcp"
+    }
+  }
+}

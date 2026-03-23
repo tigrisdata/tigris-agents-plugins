@@ -1,0 +1,94 @@
+---
+description: Tigris SDK best practices — endpoint config, client uploads, error handling, pagination, and environment variables
+globs: "**/*.{ts,tsx,js,jsx}"
+alwaysApply: false
+---
+
+# Tigris SDK Patterns
+
+## Endpoint & Region
+
+- Always use `https://t3.storage.dev` as the endpoint.
+- Always set region to `auto` — Tigris handles geo-routing automatically.
+- Environment variable: `AWS_ENDPOINT_URL_S3=https://t3.storage.dev`
+
+```typescript
+const s3 = new S3Client({
+  region: "auto",
+  endpoint: "https://t3.storage.dev",
+});
+```
+
+## Client Uploads
+
+Use the `@tigrisdata/storage` SDK for client-side uploads that bypass your server:
+
+```typescript
+// Client — browser
+import { upload } from "@tigrisdata/storage/client";
+
+await upload("my-file.png", file, {
+  url: "/api/upload", // your server endpoint
+  onUploadProgress: (p) => console.log(p.percentage),
+});
+```
+
+```typescript
+// Server — API route
+import { handleClientUpload } from "@tigrisdata/storage";
+
+export async function POST(request: Request) {
+  const result = await handleClientUpload(request);
+  return Response.json(result);
+}
+```
+
+There is NO `clientUploadToken()` function — do not hallucinate it.
+
+## Error Handling
+
+Always check `result.error` before accessing `result.data`:
+
+```typescript
+const result = await put("my-bucket", "key", data);
+if (result.error) {
+  console.error("Upload failed:", result.error);
+  return;
+}
+// Safe to use result.data
+```
+
+## Pagination
+
+Use `hasMore` + `paginationToken` for paginated listings:
+
+```typescript
+let token: string | undefined;
+do {
+  const result = await list("my-bucket", {
+    prefix: "uploads/",
+    paginationToken: token,
+  });
+  for (const obj of result.data.objects) {
+    // process object
+  }
+  token = result.data.hasMore ? result.data.paginationToken : undefined;
+} while (token);
+```
+
+## URI Schemes
+
+- **CLI**: use `t3://bucket-name/key` or `tigris://bucket-name/key`
+- **SDK**: use plain strings for bucket and key — no URI prefix
+
+## Environment Variables
+
+```bash
+AWS_ACCESS_KEY_ID=tid_...
+AWS_SECRET_ACCESS_KEY=tsec_...
+AWS_ENDPOINT_URL_S3=https://t3.storage.dev
+```
+
+- Never commit credentials to source control.
+- Use `.env.local` or secrets management for keys.
+- Tigris keys always start with `tid_` (access) and `tsec_` (secret).
