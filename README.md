@@ -15,7 +15,7 @@ Install using the [plugin marketplace](https://code.claude.com/docs/en/discover-
 
 ### Cursor
 
-Install from the [Cursor Marketplace](https://cursor.com/marketplace) or add manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `tigrisdata/tigris-agents-plugins`.
+Add manually via **Settings > Rules > Add Rule > Remote Rule (Github)** with `tigrisdata/tigris-agents-plugins`.
 
 ## Skills
 
