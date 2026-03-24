@@ -31,7 +31,7 @@ Skills are contextual and auto-loaded based on your conversation. When a request
 
 ## MCP Server
 
-This plugin includes [Tigris's remote MCP server](https://github.com/tigrisdata/tigris-mcp-server) with OAuth authentication — no API keys to configure:
+Tigris also provides a [remote MCP server](https://github.com/tigrisdata/mcp) with OAuth authentication — no API keys to configure. Add it to your editor's MCP config if you want tool-based access alongside the CLI:
 
 | Tool                             | Purpose                          |
 | -------------------------------- | -------------------------------- |

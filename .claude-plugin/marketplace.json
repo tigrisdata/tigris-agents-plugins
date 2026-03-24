@@ -9,7 +9,7 @@
     {
       "name": "tigris-storage",
       "source": "./",
-      "description": "Complete Tigris object storage integration — CLI reference, bucket/object management via MCP, and a specialized storage agent."
+      "description": "Complete Tigris object storage integration — CLI reference, bucket/object management, and a specialized storage agent."
     }
   ]
 }
