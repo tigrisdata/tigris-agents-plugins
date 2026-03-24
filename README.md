@@ -10,7 +10,7 @@ Install using the [plugin marketplace](https://code.claude.com/docs/en/discover-
 
 ```
 /plugin marketplace add tigrisdata/tigris-agents-plugins
-/plugin install tigris-agents-plugins@tigris-storage
+/plugin install tigris-storage@tigris-agents-plugins
 ```
 
 ### Cursor
