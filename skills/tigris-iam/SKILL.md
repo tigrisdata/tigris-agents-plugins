@@ -18,10 +18,10 @@ tigris iam policies list
 tigris iam policies list --json
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--format` | `-f` | Output format (`json`, `table`, `xml`) | `table` |
-| `--json` | | Output as JSON | |
+| Flag       | Alias | Description                            | Default |
+| ---------- | ----- | -------------------------------------- | ------- |
+| `--format` | `-f`  | Output format (`json`, `table`, `xml`) | `table` |
+| `--json`   |       | Output as JSON                         |         |
 
 ### `tigris iam policies get [arn]` (alias: `g`)
 
@@ -33,10 +33,10 @@ tigris iam policies get arn:aws:iam::org_id:policy/my-policy
 tigris iam policies get --json
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--format` | `-f` | Output format (`json`, `table`, `xml`) | `table` |
-| `--json` | | Output as JSON | |
+| Flag       | Alias | Description                            | Default |
+| ---------- | ----- | -------------------------------------- | ------- |
+| `--format` | `-f`  | Output format (`json`, `table`, `xml`) | `table` |
+| `--json`   |       | Output as JSON                         |         |
 
 ### `tigris iam policies create <name>` (alias: `c`)
 
@@ -48,10 +48,10 @@ tigris iam policies create my-policy --document '{"Version":"2012-10-17","Statem
 cat policy.json | tigris iam policies create my-policy
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--document` | `-d` | Policy document (JSON file path or inline JSON). Reads from stdin if omitted |
-| `--description` | | Policy description |
+| Flag            | Alias | Description                                                                  |
+| --------------- | ----- | ---------------------------------------------------------------------------- |
+| `--document`    | `-d`  | Policy document (JSON file path or inline JSON). Reads from stdin if omitted |
+| `--description` |       | Policy description                                                           |
 
 ### `tigris iam policies edit [arn]` (alias: `e`)
 
@@ -63,10 +63,10 @@ tigris iam policies edit arn:aws:iam::org_id:policy/my-policy --document policy.
 cat policy.json | tigris iam policies edit arn:aws:iam::org_id:policy/my-policy
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--document` | `-d` | New policy document (JSON file path or inline JSON). Reads from stdin if omitted |
-| `--description` | | Update policy description |
+| Flag            | Alias | Description                                                                      |
+| --------------- | ----- | -------------------------------------------------------------------------------- |
+| `--document`    | `-d`  | New policy document (JSON file path or inline JSON). Reads from stdin if omitted |
+| `--description` |       | Update policy description                                                        |
 
 ### `tigris iam policies delete [arn]` (alias: `d`)
 
@@ -77,8 +77,8 @@ tigris iam policies delete
 tigris iam policies delete arn:aws:iam::org_id:policy/my-policy --force
 ```
 
-| Flag | Description |
-|------|-------------|
+| Flag      | Description              |
+| --------- | ------------------------ |
 | `--force` | Skip confirmation prompt |
 
 ### Policy Document Format
@@ -109,10 +109,7 @@ Policies use AWS IAM JSON format:
     {
       "Effect": "Allow",
       "Action": ["s3:GetObject", "s3:ListBucket"],
-      "Resource": [
-        "arn:aws:s3:::my-bucket",
-        "arn:aws:s3:::my-bucket/*"
-      ]
+      "Resource": ["arn:aws:s3:::my-bucket", "arn:aws:s3:::my-bucket/*"]
     }
   ]
 }
@@ -142,10 +139,7 @@ Policies use AWS IAM JSON format:
     {
       "Effect": "Allow",
       "Action": ["s3:*"],
-      "Resource": [
-        "arn:aws:s3:::my-bucket",
-        "arn:aws:s3:::my-bucket/*"
-      ]
+      "Resource": ["arn:aws:s3:::my-bucket", "arn:aws:s3:::my-bucket/*"]
     }
   ]
 }
@@ -164,10 +158,10 @@ tigris iam users list
 tigris iam users list --json
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--format` | `-f` | Output format (`json`, `table`, `xml`) | `table` |
-| `--json` | | Output as JSON | |
+| Flag       | Alias | Description                            | Default |
+| ---------- | ----- | -------------------------------------- | ------- |
+| `--format` | `-f`  | Output format (`json`, `table`, `xml`) | `table` |
+| `--json`   |       | Output as JSON                         |         |
 
 ### `tigris iam users invite <email>` (alias: `i`)
 
@@ -179,9 +173,9 @@ tigris iam users invite user@example.com --role admin
 tigris iam users invite user1@example.com,user2@example.com
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--role` | `-r` | Role to assign (`admin`, `member`) | `member` |
+| Flag     | Alias | Description                        | Default  |
+| -------- | ----- | ---------------------------------- | -------- |
+| `--role` | `-r`  | Role to assign (`admin`, `member`) | `member` |
 
 ### `tigris iam users revoke-invitation [id]` (alias: `ri`)
 
@@ -193,8 +187,8 @@ tigris iam users revoke-invitation invitation_id --force
 tigris iam users revoke-invitation id1,id2,id3 --force
 ```
 
-| Flag | Description |
-|------|-------------|
+| Flag      | Description              |
+| --------- | ------------------------ |
 | `--force` | Skip confirmation prompt |
 
 ### `tigris iam users update-role [id]` (alias: `ur`)
@@ -208,9 +202,9 @@ tigris iam users update-role id1,id2 --role admin
 tigris iam users update-role id1,id2 --role admin,member
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--role` | `-r` | Role(s) to assign (`admin`, `member`), comma-separated. Each role pairs with the corresponding user ID. If one role is given, it applies to all users |
+| Flag     | Alias | Description                                                                                                                                           |
+| -------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--role` | `-r`  | Role(s) to assign (`admin`, `member`), comma-separated. Each role pairs with the corresponding user ID. If one role is given, it applies to all users |
 
 ### `tigris iam users remove [id]` (alias: `rm`)
 
@@ -222,13 +216,13 @@ tigris iam users remove user@example.com --force
 tigris iam users remove user@example.com,user@example.net --force
 ```
 
-| Flag | Description |
-|------|-------------|
+| Flag      | Description              |
+| --------- | ------------------------ |
 | `--force` | Skip confirmation prompt |
 
 ## Roles
 
-| Role | Description |
-|------|-------------|
-| `admin` | Full access to all organization resources and settings |
+| Role     | Description                                                                          |
+| -------- | ------------------------------------------------------------------------------------ |
+| `admin`  | Full access to all organization resources and settings                               |
 | `member` | Limited access — can use buckets and objects but cannot manage organization settings |

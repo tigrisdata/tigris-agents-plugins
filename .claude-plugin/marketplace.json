@@ -1,0 +1,15 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "tigris-agents-plugins",
+  "owner": {
+    "name": "Tigris Data",
+    "url": "https://www.tigrisdata.com"
+  },
+  "plugins": [
+    {
+      "name": "tigris-storage",
+      "source": "./",
+      "description": "Complete Tigris object storage integration — CLI reference, bucket/object management, and a specialized storage agent."
+    }
+  ]
+}
