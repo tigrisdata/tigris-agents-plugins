@@ -4,13 +4,10 @@
     "name": "Tigris Data",
     "email": "help@tigrisdata.com"
   },
-  "metadata": {
-    "description": "Tigris object storage plugins for AI code editors"
-  },
   "plugins": [
     {
       "name": "tigris-storage",
-      "source": "cursor",
+      "source": "./",
       "description": "Complete Tigris object storage integration — CLI reference, bucket/object management via MCP, security rules, and a specialized storage agent."
     }
   ]

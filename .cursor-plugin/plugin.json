@@ -3,7 +3,11 @@
   "displayName": "Tigris Storage",
   "version": "1.0.0",
   "description": "Complete Tigris object storage integration — CLI reference, bucket/object management via MCP, security rules, and a specialized storage agent.",
-  "author": { "name": "Tigris Data Inc" },
+  "author": {
+    "name": "Tigris Data Inc",
+    "email": "help@tigrisdata.com",
+    "url": "https://www.tigrisdata.com"
+  },
   "license": "MIT",
   "keywords": ["tigris", "object-storage", "s3", "storage", "cdn", "blob-storage"],
   "logo": "assets/logo.svg"
