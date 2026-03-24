@@ -35,17 +35,17 @@ tigris login credentials            # access key + secret (prompts if not provid
 tigris login credentials --access-key tid_AaBb --access-secret tsec_XxYy
 ```
 
-| Subcommand | Alias | Description |
-|------------|-------|-------------|
-| `login` (default) | `l` | Interactive — choose login method |
-| `login oauth` | `login o` | Login via browser using OAuth2 device flow |
+| Subcommand          | Alias     | Description                                             |
+| ------------------- | --------- | ------------------------------------------------------- |
+| `login` (default)   | `l`       | Interactive — choose login method                       |
+| `login oauth`       | `login o` | Login via browser using OAuth2 device flow              |
 | `login credentials` | `login c` | Login with an access key and secret (temporary session) |
 
 **`login credentials` flags:**
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--access-key` | `--key` | Access key ID (prompts if not provided) |
+| Flag              | Alias      | Description                                 |
+| ----------------- | ---------- | ------------------------------------------- |
+| `--access-key`    | `--key`    | Access key ID (prompts if not provided)     |
 | `--access-secret` | `--secret` | Secret access key (prompts if not provided) |
 
 ### `tigris configure`
@@ -57,11 +57,11 @@ tigris configure --access-key tid_AaBb --access-secret tsec_XxYy
 tigris configure --endpoint https://custom.endpoint.dev
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--access-key` | `--key` | Your Tigris access key ID |
-| `--access-secret` | `--secret` | Your Tigris secret access key |
-| `--endpoint` | `-e` | Tigris API endpoint (default: `https://t3.storage.dev`) |
+| Flag              | Alias      | Description                                             |
+| ----------------- | ---------- | ------------------------------------------------------- |
+| `--access-key`    | `--key`    | Your Tigris access key ID                               |
+| `--access-secret` | `--secret` | Your Tigris secret access key                           |
+| `--endpoint`      | `-e`       | Tigris API endpoint (default: `https://t3.storage.dev`) |
 
 ### `tigris whoami`
 
@@ -72,10 +72,10 @@ tigris whoami
 tigris whoami --json
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--format` | `-f` | Output format (`json`, `table`; default: `table`) |
-| `--json` | | Output as JSON |
+| Flag       | Alias | Description                                       |
+| ---------- | ----- | ------------------------------------------------- |
+| `--format` | `-f`  | Output format (`json`, `table`; default: `table`) |
+| `--json`   |       | Output as JSON                                    |
 
 ### `tigris logout`
 
@@ -94,11 +94,11 @@ tigris credentials test
 tigris credentials test --bucket my-bucket
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--bucket` | `-b` | Bucket name to test access against (optional) |
-| `--format` | `-f` | Output format (`json`, `table`; default: `table`) |
-| `--json` | | Output as JSON |
+| Flag       | Alias | Description                                       |
+| ---------- | ----- | ------------------------------------------------- |
+| `--bucket` | `-b`  | Bucket name to test access against (optional)     |
+| `--format` | `-f`  | Output format (`json`, `table`; default: `table`) |
+| `--json`   |       | Output as JSON                                    |
 
 ### `tigris orgs list` / `create` / `select`
 
@@ -111,11 +111,11 @@ tigris orgs create my-org           # create a new organization
 tigris orgs select my-org           # set active organization
 ```
 
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `orgs list` | `orgs l` | List all organizations and interactively select one |
-| `orgs create <name>` | `orgs c` | Create a new organization |
-| `orgs select <name>` | `orgs s` | Set the named organization as active |
+| Command              | Alias    | Description                                         |
+| -------------------- | -------- | --------------------------------------------------- |
+| `orgs list`          | `orgs l` | List all organizations and interactively select one |
+| `orgs create <name>` | `orgs c` | Create a new organization                           |
+| `orgs select <name>` | `orgs s` | Set the named organization as active                |
 
 ## Environment Variables
 
@@ -123,26 +123,26 @@ When credentials are set via environment variables, they take precedence over `~
 
 ### Tigris
 
-| Variable | Description |
-|----------|-------------|
-| `TIGRIS_STORAGE_ACCESS_KEY_ID` | Tigris access key ID (e.g. `tid_AaBb`) |
+| Variable                           | Description                                 |
+| ---------------------------------- | ------------------------------------------- |
+| `TIGRIS_STORAGE_ACCESS_KEY_ID`     | Tigris access key ID (e.g. `tid_AaBb`)      |
 | `TIGRIS_STORAGE_SECRET_ACCESS_KEY` | Tigris secret access key (e.g. `tsec_XxYy`) |
-| `TIGRIS_STORAGE_ENDPOINT` | Tigris endpoint (`https://t3.storage.dev`) |
-| `TIGRIS_STORAGE_BUCKET` | Default bucket name |
+| `TIGRIS_STORAGE_ENDPOINT`          | Tigris endpoint (`https://t3.storage.dev`)  |
+| `TIGRIS_STORAGE_BUCKET`            | Default bucket name                         |
 
 ### AWS S3-compatible
 
-| Variable | Description |
-|----------|-------------|
-| `AWS_ACCESS_KEY_ID` | Tigris access key ID (e.g. `tid_AaBb`) |
+| Variable                | Description                                 |
+| ----------------------- | ------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | Tigris access key ID (e.g. `tid_AaBb`)      |
 | `AWS_SECRET_ACCESS_KEY` | Tigris secret access key (e.g. `tsec_XxYy`) |
-| `AWS_ENDPOINT_URL_S3` | Tigris endpoint (`https://t3.storage.dev`) |
+| `AWS_ENDPOINT_URL_S3`   | Tigris endpoint (`https://t3.storage.dev`)  |
 
 ## Global Flags
 
 These flags are available on all `tigris` commands:
 
-| Flag | Description |
-|------|-------------|
+| Flag     | Description                                                       |
+| -------- | ----------------------------------------------------------------- |
 | `--json` | Output in JSON format (useful for programmatic/agent consumption) |
-| `--yes` | Skip confirmation prompts (prevents interactive mode) |
+| `--yes`  | Skip confirmation prompts (prevents interactive mode)             |

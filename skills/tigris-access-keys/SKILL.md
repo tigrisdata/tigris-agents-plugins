@@ -18,10 +18,10 @@ tigris access-keys list
 tigris access-keys list --json
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--format` | `-f` | Output format (`json`, `table`, `xml`) | `table` |
-| `--json` | | Output as JSON | |
+| Flag       | Alias | Description                            | Default |
+| ---------- | ----- | -------------------------------------- | ------- |
+| `--format` | `-f`  | Output format (`json`, `table`, `xml`) | `table` |
+| `--json`   |       | Output as JSON                         |         |
 
 ### `tigris access-keys create <name>` (alias: `c`)
 
@@ -32,10 +32,10 @@ tigris access-keys create my-ci-key
 tigris access-keys create my-ci-key --json
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--format` | `-f` | Output format (`json`, `table`) | `table` |
-| `--json` | | Output as JSON | |
+| Flag       | Alias | Description                     | Default |
+| ---------- | ----- | ------------------------------- | ------- |
+| `--format` | `-f`  | Output format (`json`, `table`) | `table` |
+| `--json`   |       | Output as JSON                  |         |
 
 ### `tigris access-keys get <id>` (alias: `g`)
 
@@ -46,10 +46,10 @@ tigris access-keys get tid_AaBbCcDdEeFf
 tigris access-keys get tid_AaBbCcDdEeFf --json
 ```
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--format` | `-f` | Output format (`json`, `table`) | `table` |
-| `--json` | | Output as JSON | |
+| Flag       | Alias | Description                     | Default |
+| ---------- | ----- | ------------------------------- | ------- |
+| `--format` | `-f`  | Output format (`json`, `table`) | `table` |
+| `--json`   |       | Output as JSON                  |         |
 
 ### `tigris access-keys delete <id>` (alias: `d`)
 
@@ -59,11 +59,11 @@ Permanently delete an access key. This revokes all access immediately.
 tigris access-keys delete tid_AaBbCcDdEeFf --force
 ```
 
-| Flag | Description |
-|------|-------------|
-| `--force` | Skip confirmation prompt |
+| Flag              | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| `--force`         | Skip confirmation prompt                          |
 | `--format` / `-f` | Output format (`json`, `table`; default: `table`) |
-| `--json` | Output as JSON |
+| `--json`          | Output as JSON                                    |
 
 ### `tigris access-keys assign <id>` (alias: `a`)
 
@@ -83,14 +83,14 @@ tigris access-keys assign tid_AaBb --admin
 tigris access-keys assign tid_AaBb --revoke-roles
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--bucket` | `-b` | Bucket name(s), comma-separated. Each bucket pairs positionally with a `--role` value |
-| `--role` | `-r` | Role(s) to assign (`Editor`, `ReadOnly`), comma-separated. Each role pairs with the corresponding `--bucket` |
-| `--admin` | | Grant admin access to all buckets in the organization |
-| `--revoke-roles` | | Revoke all bucket roles from the access key |
-| `--format` | `-f` | Output format (`json`, `table`; default: `table`) |
-| `--json` | | Output as JSON |
+| Flag             | Alias | Description                                                                                                  |
+| ---------------- | ----- | ------------------------------------------------------------------------------------------------------------ |
+| `--bucket`       | `-b`  | Bucket name(s), comma-separated. Each bucket pairs positionally with a `--role` value                        |
+| `--role`         | `-r`  | Role(s) to assign (`Editor`, `ReadOnly`), comma-separated. Each role pairs with the corresponding `--bucket` |
+| `--admin`        |       | Grant admin access to all buckets in the organization                                                        |
+| `--revoke-roles` |       | Revoke all bucket roles from the access key                                                                  |
+| `--format`       | `-f`  | Output format (`json`, `table`; default: `table`)                                                            |
+| `--json`         |       | Output as JSON                                                                                               |
 
 ## Workflow
 

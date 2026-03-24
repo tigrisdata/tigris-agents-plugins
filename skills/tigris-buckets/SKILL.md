@@ -7,21 +7,21 @@ description: Use when creating, configuring, or deleting Tigris buckets — incl
 
 ## Quick Reference
 
-| Command | Description |
-|---------|-------------|
-| `tigris mk <name>` | Create a bucket (or folder with trailing `/`) |
-| `tigris buckets list` | List all buckets |
-| `tigris buckets get <name>` | Inspect bucket details |
-| `tigris buckets delete <name>` | Delete a bucket |
-| `tigris buckets set <name>` | Update bucket settings |
-| `tigris buckets set-ttl <name>` | Configure object expiration |
-| `tigris buckets set-locations <name>` | Set data locations |
-| `tigris buckets set-migration <name>` | Configure shadow bucket migration |
-| `tigris buckets set-transition <name>` | Configure storage class transitions |
-| `tigris buckets set-notifications <name>` | Configure event webhooks |
-| `tigris buckets set-cors <name>` | Configure CORS rules |
-| `tigris snapshots list <bucket>` | List bucket snapshots |
-| `tigris snapshots take <bucket>` | Take a snapshot |
+| Command                                   | Description                                   |
+| ----------------------------------------- | --------------------------------------------- |
+| `tigris mk <name>`                        | Create a bucket (or folder with trailing `/`) |
+| `tigris buckets list`                     | List all buckets                              |
+| `tigris buckets get <name>`               | Inspect bucket details                        |
+| `tigris buckets delete <name>`            | Delete a bucket                               |
+| `tigris buckets set <name>`               | Update bucket settings                        |
+| `tigris buckets set-ttl <name>`           | Configure object expiration                   |
+| `tigris buckets set-locations <name>`     | Set data locations                            |
+| `tigris buckets set-migration <name>`     | Configure shadow bucket migration             |
+| `tigris buckets set-transition <name>`    | Configure storage class transitions           |
+| `tigris buckets set-notifications <name>` | Configure event webhooks                      |
+| `tigris buckets set-cors <name>`          | Configure CORS rules                          |
+| `tigris snapshots list <bucket>`          | List bucket snapshots                         |
+| `tigris snapshots take <bucket>`          | Take a snapshot                               |
 
 ## Create a Bucket
 
@@ -52,19 +52,19 @@ tigris buckets create my-fork --fork-of my-bucket --source-snapshot 176588900050
 
 **Flags:**
 
-| Flag | Alias | Description | Default |
-|------|-------|-------------|---------|
-| `--access` | `-a` | Access level (`public`, `private`) | `private` |
-| `--public` | | Shorthand for `--access public` | |
-| `--locations` | `-l` | Bucket location (see [Locations](#locations)) | `global` |
-| `--default-tier` | `-t` | Default storage tier (see [Storage Tiers](#storage-tiers)) | `STANDARD` |
-| `--enable-snapshots` | `-s` | Enable snapshots for the bucket | `false` |
-| `--fork-of` | `--fork` | Create as a fork (copy-on-write clone) of the named source bucket | |
-| `--source-snapshot` | `--source-snap` | Fork from a specific snapshot (requires `--fork-of`) | |
-| `--format` | `-f` | Output format (`json`, `table`) | `table` |
-| `--json` | | Output as JSON | |
-| `--consistency` | `-c` | **(Deprecated)** Use `--locations` instead | |
-| `--region` | `-r` | **(Deprecated)** Use `--locations` instead | |
+| Flag                 | Alias           | Description                                                       | Default    |
+| -------------------- | --------------- | ----------------------------------------------------------------- | ---------- |
+| `--access`           | `-a`            | Access level (`public`, `private`)                                | `private`  |
+| `--public`           |                 | Shorthand for `--access public`                                   |            |
+| `--locations`        | `-l`            | Bucket location (see [Locations](#locations))                     | `global`   |
+| `--default-tier`     | `-t`            | Default storage tier (see [Storage Tiers](#storage-tiers))        | `STANDARD` |
+| `--enable-snapshots` | `-s`            | Enable snapshots for the bucket                                   | `false`    |
+| `--fork-of`          | `--fork`        | Create as a fork (copy-on-write clone) of the named source bucket |            |
+| `--source-snapshot`  | `--source-snap` | Fork from a specific snapshot (requires `--fork-of`)              |            |
+| `--format`           | `-f`            | Output format (`json`, `table`)                                   | `table`    |
+| `--json`             |                 | Output as JSON                                                    |            |
+| `--consistency`      | `-c`            | **(Deprecated)** Use `--locations` instead                        |            |
+| `--region`           | `-r`            | **(Deprecated)** Use `--locations` instead                        |            |
 
 ## List Buckets
 
@@ -78,11 +78,11 @@ tigris buckets list --json
 tigris buckets list --forks-of my-bucket
 ```
 
-| Flag | Description |
-|------|-------------|
-| `--forks-of` | Only list buckets that are forks of the named source bucket |
-| `--format` / `-f` | Output format (`json`, `table`, `xml`; default: `table`) |
-| `--json` | Output as JSON |
+| Flag              | Description                                                 |
+| ----------------- | ----------------------------------------------------------- |
+| `--forks-of`      | Only list buckets that are forks of the named source bucket |
+| `--format` / `-f` | Output format (`json`, `table`, `xml`; default: `table`)    |
+| `--json`          | Output as JSON                                              |
 
 ## Inspect a Bucket
 
@@ -95,10 +95,10 @@ tigris buckets get my-bucket
 tigris buckets get my-bucket --json
 ```
 
-| Flag | Description |
-|------|-------------|
+| Flag              | Description                                              |
+| ----------------- | -------------------------------------------------------- |
 | `--format` / `-f` | Output format (`json`, `table`, `xml`; default: `table`) |
-| `--json` | Output as JSON |
+| `--json`          | Output as JSON                                           |
 
 ## Delete a Bucket
 
@@ -111,11 +111,11 @@ tigris buckets delete my-bucket --force
 tigris buckets delete bucket-a,bucket-b --force
 ```
 
-| Flag | Description |
-|------|-------------|
-| `--force` | Skip confirmation prompt |
+| Flag              | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| `--force`         | Skip confirmation prompt                          |
 | `--format` / `-f` | Output format (`json`, `table`; default: `table`) |
-| `--json` | Output as JSON |
+| `--json`          | Output as JSON                                    |
 
 ## Update Bucket Settings
 
@@ -129,19 +129,19 @@ tigris buckets set my-bucket --locations iad,fra --cache-control 'max-age=3600'
 tigris buckets set my-bucket --custom-domain assets.example.com
 ```
 
-| Flag | Description |
-|------|-------------|
-| `--access` | Bucket access level (`public`, `private`) |
-| `--locations` | Bucket locations (see [Locations](#locations)) |
-| `--enable-delete-protection` | Enable delete protection (`true`/`false`) |
-| `--cache-control` | Default cache-control header value |
-| `--custom-domain` | Custom domain for the bucket |
-| `--allow-object-acl` | Enable object-level ACL (`true`/`false`) |
-| `--disable-directory-listing` | Disable directory listing (`true`/`false`) |
+| Flag                          | Description                                                                            |
+| ----------------------------- | -------------------------------------------------------------------------------------- |
+| `--access`                    | Bucket access level (`public`, `private`)                                              |
+| `--locations`                 | Bucket locations (see [Locations](#locations))                                         |
+| `--enable-delete-protection`  | Enable delete protection (`true`/`false`)                                              |
+| `--cache-control`             | Default cache-control header value                                                     |
+| `--custom-domain`             | Custom domain for the bucket                                                           |
+| `--allow-object-acl`          | Enable object-level ACL (`true`/`false`)                                               |
+| `--disable-directory-listing` | Disable directory listing (`true`/`false`)                                             |
 | `--enable-additional-headers` | Enable additional HTTP headers like `X-Content-Type-Options: nosniff` (`true`/`false`) |
-| `--region` | **(Deprecated)** Use `--locations` instead |
-| `--format` | Output format (`json`, `table`; default: `table`) |
-| `--json` | Output as JSON |
+| `--region`                    | **(Deprecated)** Use `--locations` instead                                             |
+| `--format`                    | Output format (`json`, `table`; default: `table`)                                      |
+| `--json`                      | Output as JSON                                                                         |
 
 ## Bucket Configuration Commands
 
@@ -155,12 +155,12 @@ tigris buckets set-ttl my-bucket --date 2026-06-01
 tigris buckets set-ttl my-bucket --disable
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--days` | `-d` | Expire objects after this many days |
-| `--date` | | Expire objects on this date (ISO-8601, e.g. `2026-06-01`) |
-| `--enable` | | Enable TTL (uses existing lifecycle rules) |
-| `--disable` | | Disable TTL on the bucket |
+| Flag        | Alias | Description                                               |
+| ----------- | ----- | --------------------------------------------------------- |
+| `--days`    | `-d`  | Expire objects after this many days                       |
+| `--date`    |       | Expire objects on this date (ISO-8601, e.g. `2026-06-01`) |
+| `--enable`  |       | Enable TTL (uses existing lifecycle rules)                |
+| `--disable` |       | Disable TTL on the bucket                                 |
 
 ### `tigris buckets set-locations <name>`
 
@@ -172,9 +172,9 @@ tigris buckets set-locations my-bucket --locations iad,fra
 tigris buckets set-locations my-bucket --locations global
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--locations` | `-l` | Bucket location(s) — comma-separated (see [Locations](#locations)) |
+| Flag          | Alias | Description                                                        |
+| ------------- | ----- | ------------------------------------------------------------------ |
+| `--locations` | `-l`  | Bucket location(s) — comma-separated (see [Locations](#locations)) |
 
 ### `tigris buckets set-migration <name>`
 
@@ -203,15 +203,15 @@ tigris buckets set-migration my-bucket --disable
 
 **Migration workflow:** Point Tigris at your existing S3-compatible bucket. Tigris serves objects on demand — when a request hits Tigris and the object isn't cached yet, it fetches from the source. Over time, all accessed objects are pulled into Tigris. Use `--write-through` to also push new writes back to the source during migration.
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--bucket` | `-b` | Name of the source bucket to migrate from |
-| `--endpoint` | `-e` | Endpoint URL of the source S3-compatible service |
-| `--region` | `-r` | Region of the source bucket |
-| `--access-key` | `--key` | Access key for the source bucket |
-| `--secret-key` | `--secret` | Secret key for the source bucket |
-| `--write-through` | | Enable write-through mode |
-| `--disable` | | Disable migration and clear all migration settings |
+| Flag              | Alias      | Description                                        |
+| ----------------- | ---------- | -------------------------------------------------- |
+| `--bucket`        | `-b`       | Name of the source bucket to migrate from          |
+| `--endpoint`      | `-e`       | Endpoint URL of the source S3-compatible service   |
+| `--region`        | `-r`       | Region of the source bucket                        |
+| `--access-key`    | `--key`    | Access key for the source bucket                   |
+| `--secret-key`    | `--secret` | Secret key for the source bucket                   |
+| `--write-through` |            | Enable write-through mode                          |
+| `--disable`       |            | Disable migration and clear all migration settings |
 
 ### `tigris buckets set-transition <name>`
 
@@ -224,13 +224,13 @@ tigris buckets set-transition my-bucket --enable
 tigris buckets set-transition my-bucket --disable
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--storage-class` | `-s` | Target storage class (`STANDARD_IA`, `GLACIER`, `GLACIER_IR`) |
-| `--days` | `-d` | Transition objects after this many days |
-| `--date` | | Transition objects on this date (ISO-8601) |
-| `--enable` | | Enable lifecycle transition rules |
-| `--disable` | | Disable lifecycle transition rules |
+| Flag              | Alias | Description                                                   |
+| ----------------- | ----- | ------------------------------------------------------------- |
+| `--storage-class` | `-s`  | Target storage class (`STANDARD_IA`, `GLACIER`, `GLACIER_IR`) |
+| `--days`          | `-d`  | Transition objects after this many days                       |
+| `--date`          |       | Transition objects on this date (ISO-8601)                    |
+| `--enable`        |       | Enable lifecycle transition rules                             |
+| `--disable`       |       | Disable lifecycle transition rules                            |
 
 ### `tigris buckets set-notifications <name>`
 
@@ -246,16 +246,16 @@ tigris buckets set-notifications my-bucket --disable
 tigris buckets set-notifications my-bucket --reset
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--url` | `-u` | Webhook URL (must be `http` or `https`) |
-| `--filter` | `-f` | SQL WHERE clause to filter events by key |
-| `--token` | `-t` | Token for webhook authentication |
-| `--username` | | Username for basic webhook authentication |
-| `--password` | | Password for basic webhook authentication |
-| `--enable` | | Enable notifications (uses existing config) |
-| `--disable` | | Disable notifications (preserves existing config) |
-| `--reset` | | Clear all notification settings |
+| Flag         | Alias | Description                                       |
+| ------------ | ----- | ------------------------------------------------- |
+| `--url`      | `-u`  | Webhook URL (must be `http` or `https`)           |
+| `--filter`   | `-f`  | SQL WHERE clause to filter events by key          |
+| `--token`    | `-t`  | Token for webhook authentication                  |
+| `--username` |       | Username for basic webhook authentication         |
+| `--password` |       | Password for basic webhook authentication         |
+| `--enable`   |       | Enable notifications (uses existing config)       |
+| `--disable`  |       | Disable notifications (preserves existing config) |
+| `--reset`    |       | Clear all notification settings                   |
 
 ### `tigris buckets set-cors <name>`
 
@@ -268,15 +268,15 @@ tigris buckets set-cors my-bucket --origins https://example.com --override
 tigris buckets set-cors my-bucket --reset
 ```
 
-| Flag | Alias | Description |
-|------|-------|-------------|
-| `--origins` | `-o` | Allowed origins (comma-separated, or `*` for all) |
-| `--methods` | `-m` | Allowed HTTP methods (comma-separated) |
-| `--headers` | | Allowed request headers (comma-separated, or `*`) |
-| `--expose-headers` | | Response headers to expose (comma-separated) |
-| `--max-age` | | Preflight cache duration in seconds (default: `3600`) |
-| `--override` | | Replace all existing CORS rules instead of appending |
-| `--reset` | | Clear all CORS rules |
+| Flag               | Alias | Description                                           |
+| ------------------ | ----- | ----------------------------------------------------- |
+| `--origins`        | `-o`  | Allowed origins (comma-separated, or `*` for all)     |
+| `--methods`        | `-m`  | Allowed HTTP methods (comma-separated)                |
+| `--headers`        |       | Allowed request headers (comma-separated, or `*`)     |
+| `--expose-headers` |       | Response headers to expose (comma-separated)          |
+| `--max-age`        |       | Preflight cache duration in seconds (default: `3600`) |
+| `--override`       |       | Replace all existing CORS rules instead of appending  |
+| `--reset`          |       | Clear all CORS rules                                  |
 
 ## Snapshots
 
@@ -291,10 +291,10 @@ tigris snapshots list my-bucket
 tigris snapshots list my-bucket --json
 ```
 
-| Flag | Description |
-|------|-------------|
+| Flag              | Description                                              |
+| ----------------- | -------------------------------------------------------- |
 | `--format` / `-f` | Output format (`json`, `table`, `xml`; default: `table`) |
-| `--json` | Output as JSON |
+| `--json`          | Output as JSON                                           |
 
 ### `tigris snapshots take <bucket> [name]` (alias: `t`)
 
@@ -333,35 +333,35 @@ tigris buckets list --forks-of my-bucket
 
 ### Storage Tiers
 
-| Tier | Value | Description |
-|------|-------|-------------|
-| Standard | `STANDARD` | Default. High durability, availability, and performance for frequently accessed data |
-| Infrequent Access | `STANDARD_IA` | Lower-cost for data accessed less frequently but requiring rapid access when needed |
-| Archive | `GLACIER` | Low-cost for long-term data archiving with infrequent access |
-| Instant Retrieval Archive | `GLACIER_IR` | Lowest-cost for long-lived, rarely accessed data requiring retrieval in milliseconds |
+| Tier                      | Value         | Description                                                                          |
+| ------------------------- | ------------- | ------------------------------------------------------------------------------------ |
+| Standard                  | `STANDARD`    | Default. High durability, availability, and performance for frequently accessed data |
+| Infrequent Access         | `STANDARD_IA` | Lower-cost for data accessed less frequently but requiring rapid access when needed  |
+| Archive                   | `GLACIER`     | Low-cost for long-term data archiving with infrequent access                         |
+| Instant Retrieval Archive | `GLACIER_IR`  | Lowest-cost for long-lived, rarely accessed data requiring retrieval in milliseconds |
 
 ### Locations
 
-| Name | Value | Description |
-|------|-------|-------------|
-| Global | `global` | Global (default) |
-| USA | `usa` | Restrict to USA |
-| Europe | `eur` | Restrict to Europe |
-| Amsterdam | `ams` | Amsterdam, Netherlands |
-| Frankfurt | `fra` | Frankfurt, Germany |
-| Sao Paulo | `gru` | Sao Paulo, Brazil |
-| Ashburn | `iad` | Ashburn, Virginia (US) |
-| Johannesburg | `jnb` | Johannesburg, South Africa |
-| London | `lhr` | London, United Kingdom |
-| Tokyo | `nrt` | Tokyo, Japan |
-| Chicago | `ord` | Chicago, Illinois (US) |
-| Singapore | `sin` | Singapore, Singapore |
-| San Jose | `sjc` | San Jose, California (US) |
-| Sydney | `syd` | Sydney, Australia |
+| Name         | Value    | Description                |
+| ------------ | -------- | -------------------------- |
+| Global       | `global` | Global (default)           |
+| USA          | `usa`    | Restrict to USA            |
+| Europe       | `eur`    | Restrict to Europe         |
+| Amsterdam    | `ams`    | Amsterdam, Netherlands     |
+| Frankfurt    | `fra`    | Frankfurt, Germany         |
+| Sao Paulo    | `gru`    | Sao Paulo, Brazil          |
+| Ashburn      | `iad`    | Ashburn, Virginia (US)     |
+| Johannesburg | `jnb`    | Johannesburg, South Africa |
+| London       | `lhr`    | London, United Kingdom     |
+| Tokyo        | `nrt`    | Tokyo, Japan               |
+| Chicago      | `ord`    | Chicago, Illinois (US)     |
+| Singapore    | `sin`    | Singapore, Singapore       |
+| San Jose     | `sjc`    | San Jose, California (US)  |
+| Sydney       | `syd`    | Sydney, Australia          |
 
 ### Consistency Levels (deprecated — use `--locations` instead)
 
-| Level | Value | Description |
-|-------|-------|-------------|
+| Level   | Value     | Description                                                           |
+| ------- | --------- | --------------------------------------------------------------------- |
 | Default | `default` | Strict read-after-write in same region, eventual consistency globally |
-| Strict | `strict` | Strict read-after-write globally (higher latency) |
+| Strict  | `strict`  | Strict read-after-write globally (higher latency)                     |

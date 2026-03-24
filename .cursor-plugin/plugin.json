@@ -9,6 +9,13 @@
     "url": "https://www.tigrisdata.com"
   },
   "license": "MIT",
-  "keywords": ["tigris", "object-storage", "s3", "storage", "cdn", "blob-storage"],
+  "keywords": [
+    "tigris",
+    "object-storage",
+    "s3",
+    "storage",
+    "cdn",
+    "blob-storage"
+  ],
   "logo": "assets/logo.svg"
 }
