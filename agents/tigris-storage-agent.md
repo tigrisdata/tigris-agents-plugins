@@ -33,9 +33,10 @@ When a user needs storage for a new project:
    ```
 3. Output the environment variables the user needs:
    ```
-   AWS_ACCESS_KEY_ID=tid_...
-   AWS_SECRET_ACCESS_KEY=tsec_...
-   AWS_ENDPOINT_URL_S3=https://t3.storage.dev
+   TIGRIS_STORAGE_ACCESS_KEY_ID=tid_...
+   TIGRIS_STORAGE_SECRET_ACCESS_KEY=tsec_...
+   TIGRIS_STORAGE_ENDPOINT=https://t3.storage.dev
+   TIGRIS_STORAGE_BUCKET=<bucket-name>
    ```
 4. If the project is a web app, configure CORS:
    ```bash

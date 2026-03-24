@@ -108,10 +108,6 @@ export TIGRIS_STORAGE_SECRET_ACCESS_KEY=tsec_XxYy
 export TIGRIS_STORAGE_ENDPOINT=https://t3.storage.dev
 export TIGRIS_STORAGE_BUCKET=my-bucket
 
-# Or use AWS S3-compatible env vars
-export AWS_ACCESS_KEY_ID=tid_AaBb
-export AWS_SECRET_ACCESS_KEY=tsec_XxYy
-export AWS_ENDPOINT_URL_S3=https://t3.storage.dev
 ```
 
 ## Security Best Practices

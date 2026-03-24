@@ -130,14 +130,6 @@ When credentials are set via environment variables, they take precedence over `~
 | `TIGRIS_STORAGE_ENDPOINT`          | Tigris endpoint (`https://t3.storage.dev`)  |
 | `TIGRIS_STORAGE_BUCKET`            | Default bucket name                         |
 
-### AWS S3-compatible
-
-| Variable                | Description                                 |
-| ----------------------- | ------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | Tigris access key ID (e.g. `tid_AaBb`)      |
-| `AWS_SECRET_ACCESS_KEY` | Tigris secret access key (e.g. `tsec_XxYy`) |
-| `AWS_ENDPOINT_URL_S3`   | Tigris endpoint (`https://t3.storage.dev`)  |
-
 ## Global Flags
 
 These flags are available on all `tigris` commands:
