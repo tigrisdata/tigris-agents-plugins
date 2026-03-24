@@ -1,94 +1,211 @@
 ---
-description: Tigris SDK best practices — endpoint config, client uploads, error handling, pagination, and environment variables
+description: Tigris SDK best practices — uploads, downloads, client uploads, error handling, pagination, and environment variables
 globs: "**/*.{ts,tsx,js,jsx}"
 alwaysApply: false
 ---
 
 # Tigris SDK Patterns
 
-## Endpoint & Region
-
-- Always use `https://t3.storage.dev` as the endpoint.
-- Always set region to `auto` — Tigris handles geo-routing automatically.
-- Environment variable: `AWS_ENDPOINT_URL_S3=https://t3.storage.dev`
-
-```typescript
-const s3 = new S3Client({
-  region: "auto",
-  endpoint: "https://t3.storage.dev",
-});
-```
-
-## Client Uploads
-
-Use the `@tigrisdata/storage` SDK for client-side uploads that bypass your server:
-
-```typescript
-// Client — browser
-import { upload } from "@tigrisdata/storage/client";
-
-await upload("my-file.png", file, {
-  url: "/api/upload", // your server endpoint
-  onUploadProgress: (p) => console.log(p.percentage),
-});
-```
-
-```typescript
-// Server — API route
-import { handleClientUpload } from "@tigrisdata/storage";
-
-export async function POST(request: Request) {
-  const result = await handleClientUpload(request);
-  return Response.json(result);
-}
-```
-
-There is NO `clientUploadToken()` function — do not hallucinate it.
-
-## Error Handling
-
-Always check `result.error` before accessing `result.data`:
-
-```typescript
-const result = await put("my-bucket", "key", data);
-if (result.error) {
-  console.error("Upload failed:", result.error);
-  return;
-}
-// Safe to use result.data
-```
-
-## Pagination
-
-Use `hasMore` + `paginationToken` for paginated listings:
-
-```typescript
-let token: string | undefined;
-do {
-  const result = await list("my-bucket", {
-    prefix: "uploads/",
-    paginationToken: token,
-  });
-  for (const obj of result.data.objects) {
-    // process object
-  }
-  token = result.data.hasMore ? result.data.paginationToken : undefined;
-} while (token);
-```
-
-## URI Schemes
-
-- **CLI**: use `t3://bucket-name/key` or `tigris://bucket-name/key`
-- **SDK**: use plain strings for bucket and key — no URI prefix
+Package: `@tigrisdata/storage` — install with `npm install @tigrisdata/storage`
 
 ## Environment Variables
 
+The SDK reads credentials and bucket from these env vars automatically:
+
 ```bash
-AWS_ACCESS_KEY_ID=tid_...
-AWS_SECRET_ACCESS_KEY=tsec_...
-AWS_ENDPOINT_URL_S3=https://t3.storage.dev
+TIGRIS_STORAGE_ACCESS_KEY_ID=tid_...
+TIGRIS_STORAGE_SECRET_ACCESS_KEY=tsec_...
+TIGRIS_STORAGE_BUCKET=my-bucket
 ```
 
 - Never commit credentials to source control.
 - Use `.env.local` or secrets management for keys.
 - Tigris keys always start with `tid_` (access) and `tsec_` (secret).
+- The bucket defaults to `TIGRIS_STORAGE_BUCKET` but can be overridden per-call via the `config` option.
+
+## Core Functions
+
+All functions return `{ data, error }`. Always check `error` first.
+
+### `put` — Upload
+
+```typescript
+import { put } from "@tigrisdata/storage";
+
+const { data, error } = await put("images/photo.png", file, {
+  access: "public",        // "public" | "private"
+  addRandomSuffix: false,  // append random chars to path (default: false)
+  allowOverwrite: true,    // overwrite existing (default: true)
+  contentType: "image/png",
+  contentDisposition: "inline", // "inline" | "attachment"
+  multipart: true,         // chunked upload for large files
+  onUploadProgress: ({ loaded, total, percentage }) => {
+    console.log(`${percentage}%`);
+  },
+});
+// data: { path, url, size, contentType, contentDisposition, modified }
+```
+
+### `get` — Download
+
+```typescript
+import { get } from "@tigrisdata/storage";
+
+const { data, error } = await get("images/photo.png", "file", {
+  contentDisposition: "inline", // "inline" | "attachment"
+});
+// format: "string" | "file" | "stream"
+```
+
+### `head` — Object Metadata
+
+```typescript
+import { head } from "@tigrisdata/storage";
+
+const { data, error } = await head("images/photo.png");
+// data: { path, url, size, contentType, contentDisposition, modified }
+```
+
+### `remove` — Delete
+
+```typescript
+import { remove } from "@tigrisdata/storage";
+
+const { data, error } = await remove("images/photo.png");
+```
+
+### `getPresignedUrl` — Presigned URL
+
+```typescript
+import { getPresignedUrl } from "@tigrisdata/storage";
+
+const { data, error } = await getPresignedUrl("images/photo.png", {
+  operation: "get",   // "get" | "put"
+  expiresIn: 3600,    // seconds (default: 3600)
+});
+// data: { url, method, expiresIn }
+```
+
+### `list` — List Objects
+
+```typescript
+import { list } from "@tigrisdata/storage";
+
+const { data, error } = await list({
+  prefix: "images/",
+  limit: 100,
+  delimiter: "/",
+});
+// data: { items, paginationToken, hasMore }
+```
+
+## Error Handling
+
+Always check `error` before accessing `data`:
+
+```typescript
+const { data, error } = await put("key", file);
+if (error) {
+  console.error("Upload failed:", error.message);
+  return;
+}
+// Safe to use data
+console.log(data.url);
+```
+
+## Pagination
+
+Use `hasMore` + `paginationToken`:
+
+```typescript
+let token: string | undefined;
+do {
+  const { data, error } = await list({
+    prefix: "uploads/",
+    paginationToken: token,
+  });
+  if (error) break;
+  for (const item of data.items) {
+    // process item
+  }
+  token = data.hasMore ? data.paginationToken : undefined;
+} while (token);
+```
+
+## Client Uploads
+
+Client uploads use presigned URLs so files go directly from the browser to Tigris, bypassing your server.
+
+```typescript
+// Client — browser
+import { upload } from "@tigrisdata/storage/client";
+
+const result = await upload("my-file.png", file, {
+  url: "/api/upload",    // your server endpoint (required)
+  access: "private",
+  multipart: true,
+  partSize: 10 * 1024 * 1024,  // 10 MiB chunks
+  concurrency: 4,               // parallel part uploads
+  onUploadProgress: ({ loaded, total, percentage }) => {
+    console.log(`${percentage}%`);
+  },
+});
+// result: { url, name, size, contentType, contentDisposition, modified }
+```
+
+```typescript
+// Server — API route (Next.js example)
+import { handleClientUpload } from "@tigrisdata/storage";
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const { data, error } = await handleClientUpload(body);
+  if (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+  return Response.json({ data });
+}
+```
+
+### React Uploader Component
+
+```typescript
+import { Uploader } from "@tigrisdata/react";
+import "@tigrisdata/react/styles.css";
+
+<Uploader
+  accept="image/*"
+  multiple={true}
+  multipart={true}
+  concurrency={3}
+  url="/api/upload"
+  onUploadComplete={(file, response) => console.log(response.url)}
+  onUploadError={(file, error) => console.error(error.message)}
+/>
+```
+
+## Bucket Operations
+
+```typescript
+import { createBucket, getBucketInfo, listBuckets, removeBucket } from "@tigrisdata/storage";
+
+await createBucket("my-bucket", { enableSnapshot: true });
+await getBucketInfo("my-bucket");
+await listBuckets();
+await removeBucket("my-bucket", { force: true });
+```
+
+## Per-Call Config Override
+
+Any function accepts a `config` option to override env vars for that call:
+
+```typescript
+await put("key", data, {
+  config: {
+    bucket: "other-bucket",
+    accessKeyId: "tid_...",
+    secretAccessKey: "tsec_...",
+  },
+});
+```
+
