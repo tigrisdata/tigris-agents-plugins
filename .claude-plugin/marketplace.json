@@ -1,9 +1,9 @@
 {
-  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "tigris-agents-plugins",
   "owner": {
     "name": "Tigris Data",
-    "url": "https://www.tigrisdata.com"
+    "email": "help@tigrisdata.com"
   },
   "plugins": [
     {
